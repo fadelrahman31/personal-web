@@ -19,7 +19,8 @@
     "@nuxtjs/dotenv": "^1.4.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9",
-    "@nuxtjs/vuetify": "^1.0.0"
+    "@mdi/font": "^4.7.95",
+    "@nuxtjs/vuetify": "^1.0.0",
+    "nodemon": "^1.18.9"
   }
 }
