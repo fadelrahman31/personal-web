@@ -1,15 +1,16 @@
 <template>
-    <v-app class='index'>
+    <v-app class='index' :style="style1">
         <app-navigation></app-navigation>
         <v-content>
             <home></home>
+            
         </v-content>
     </v-app>
 </template>
 
 <style>
     .index{
-        font-family: 'Nunito', sans-serif;
+        font-family: 'Roboto', sans-serif;
     }
 </style>
 
@@ -22,6 +23,15 @@ export default {
     components:{
         Home,
         AppNavigation
+    },
+    data(){
+        return{
+            style1:{
+                backgroundColor: '#2c4863'
+            }
+            
+        }
     }
 };
 </script>
+
