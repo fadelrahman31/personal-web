@@ -1,9 +1,9 @@
 <template>
     <v-app class='index' :style="style1">
         <app-navigation></app-navigation>
+        <br><br><br><br>
         <v-content>
             <home></home>
-            
         </v-content>
     </v-app>
 </template>

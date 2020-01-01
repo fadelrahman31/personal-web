@@ -22,7 +22,7 @@
             </v-list>
         </v-navigation-drawer>
         <v-app-bar
-            
+            fixed
             dark
             color="light-blue darken-4"
         >
