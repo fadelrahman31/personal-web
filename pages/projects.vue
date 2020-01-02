@@ -11,6 +11,7 @@
         >
             <div class="links ma-3 pa-0">
                 <h2>IT Projects</h2>
+                <p>For the complete project repository, you could access to my GitHub repository at welcome page!</p>
             </div>
 
             <v-container fluid>
