@@ -6,7 +6,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
+    titleTemplate: 'Fadel Nararia Rahman' ,
     title: process.env.npm_package_name,
     meta: [
       { charset: 'utf-8' },
@@ -14,7 +14,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '' },
       { rel: 'stylesheet', href : 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' }
       
     ]
