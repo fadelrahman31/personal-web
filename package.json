@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Personal website of Fadel",
   "author": "Fadel Nararia Rahman",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
     "build": "nuxt build",
