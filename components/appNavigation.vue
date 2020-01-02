@@ -36,10 +36,16 @@
                 <v-tabs 
                     align-with-title
                     background-color="transparent"
+                    grow
+                    v-model= "active_tab"
                 >
-                    <v-tab :href='`/`'>Welcome!</v-tab>
-                    <v-tab :href='`/inspire`'>Gallery</v-tab>
-                    <v-tab :href='`/#achievement`'>Projects</v-tab>
+                    <v-tab
+                        v-for= "tab in tabs"
+                        :key= "tab.index"
+                        :to= "tab.source"
+                    >
+                        {{ tab.name }}
+                    </v-tab>
                 </v-tabs>
             </template>
         </v-app-bar>
@@ -63,6 +69,16 @@ export default {
                 },
                 {
                     title : 'Meine Hobbies' 
+                }
+            ],
+            active_tab: 0,
+            tabs: [
+                {
+                    index: 0, name: 'Welcome!', source: '/'
+                },{
+                    index: 1, name: 'Gallery', source: '/gallery'
+                },{
+                    index: 2, name: 'Projects', source: '/projects'
                 }
             ]
         }
