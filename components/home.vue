@@ -5,6 +5,22 @@
                 class="mx-auto ma-3 pa-2"
                 color="#1f2647"
             >
+            <v-parallax
+                dark
+                src="/home.jpg"
+            >
+                <v-row
+                    align="center"
+                    justify="center"
+                >
+                    <v-col class="text-center" cols="12">
+                        <h1 class="display-1 font-weight-thin mb-4">Welcome_</h1>
+                        <h2 class="display-2 font-weight-thin mb-4">I'm <b>Fadel Nararia Rahman</b></h2>
+                        <h4 class="font-weight-thin">print("Hello, world!");</h4>
+                    </v-col>
+                </v-row>
+            </v-parallax>
+
             <v-container fluid>
                 <v-row>
                     <v-col
@@ -20,12 +36,24 @@
                             <v-img
                                 class="white--text align-end"
                                 max-width="650px"
-                                src="https://docs.google.com/uc?export=download&id=1uZL1Dc27cHEcNuQYecQosY2XpoNRzpKF"
+                                src="https://i.ibb.co/wLPWWzq/welcome.jpg"
                             >
                             </v-img>
-                            <v-card-text class="text--primary">     
-                                <div class="titel"><h2>Hi!</h2></div>
-                                </v-card-text>
+                            <v-card-actions>
+                                <v-btn icon @click="show = !show">
+                                   <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down'}}</v-icon> Personal Resume
+                                </v-btn>
+                            </v-card-actions>
+                            <v-expand-transition>
+                                <div v-show="show">
+                                    <v-divider></v-divider>
+                                    <v-card-text>
+                                        Here is the link to view my personal professional resume!
+                                    </v-card-text>
+                                    <v-btn class="ma-3 pa-2" href="/resume" text>Click here</v-btn>
+                                </div>
+                            </v-expand-transition>
+
                         </v-card>
                     </v-col>
                     <v-spacer></v-spacer>
@@ -34,11 +62,7 @@
                         md="7"
                         class="flex-grow-1 flex-shrink-0"
                     >
-                        <div class="titel">
-                            <h3 class="text-left" id="khusus">Welcome! My name is</h3>
-                            <h1 class="text-left font-weight-bold">Fadel Nararia Rahman</h1>   
-                            <br>
-                        </div>
+                        
                         <div class="abstract">
                             <v-card
                                 class="mx-auto ma-3 pa-5"
@@ -52,8 +76,14 @@
                             color="#1f2647"
                             flat
                         >
-                            <v-btn fab dark color="red" class="ma-2 justify-center" @click= "goToIG">
-                                <v-icon dark>mdi-instagram</v-icon>
+                            <v-btn dark color="red" class="ma-2 justify-center" @click="goToIG" text>
+                                <v-icon dark>mdi-instagram</v-icon> <b> Instagram </b>
+                            </v-btn>
+                            <v-btn dark color="blue" class="ma-2 justify-center" @click="goToTwitter" text>
+                                <v-icon dark>mdi-twitter</v-icon> <b> Twitter </b>
+                            </v-btn>
+                            <v-btn light color="green" class="ma-2 justify-center" @click="goToSpotify" text>
+                                <v-icon dark>mdi-spotify</v-icon> <b> Spotify </b>
                             </v-btn>
                         </v-card>
                     </v-col>
@@ -77,17 +107,17 @@
                         <v-card
                             class="mx-auto ma-3 pa-3"
                             color="#1f2647"
-                            max-width="255px"
+                            max-width="405px"
                             flat
                         >
-                            <v-btn fab dark color="purple" class="ma-2 justify-center" @click= "goToGit">
-                                <v-icon dark>mdi-github-circle</v-icon>
+                            <v-btn dark color = "purple" class="ma-1 justify-center" @click="goToGit" text>
+                                <v-icon left>mdi-github</v-icon> <b> Github </b>
                             </v-btn>
-                            <v-btn fab dark color="blue" class="ma-2 justify-center" @click= "goToLinkedin">
-                                <v-icon dark>mdi-linkedin</v-icon>
+                            <v-btn dark color = "blue" class="ma-1 justify-center" @click="goToLinkedin" text>
+                                <v-icon left>mdi-linkedin</v-icon> <b> Linkedin </b>
                             </v-btn>
-                            <v-btn fab dark color="black" class="ma-2 justify-center" @click= "goToMedium">
-                                <v-icon dark>mdi-medium</v-icon>
+                            <v-btn dark color = "white" class="ma-1 justify-center" @click="goToMedium" text>
+                               <b> Medium </b>
                             </v-btn>
                             <br>
                         </v-card>
@@ -249,29 +279,25 @@ export default {
                     nama: "Non Technical Manager",
                     org: "Rakata Team ITB",
                     waktu: "January 2020 - now",
-                    gambar: "https://docs.google.com/uc?export=download&id=1qbv6e84w6iWd2Mi3WqxCbv7Lgst5nJSp"
+                    gambar: "https://i.ibb.co/dP3s7P7/IMG-5892-01-min.jpg"
                 },{
                     nama: "Head of Finance and Sponsorship Division",
                     org: "Rakata Team ITB",
                     waktu: "March 2019 - December 2019",
-                    gambar: "https://docs.google.com/uc?export=download&id=1lNTy1LVhPnSpbwKIK5VxzdPpkdwypziL"
-                },{
-                    nama: "Staff of Sponsorship Division",
-                    org: "Rakata Team ITB",
-                    waktu: "March 2018 - February 2018",
-                    gambar: "https://docs.google.com/uc?export=download&id=1NliCs8BM8ckoyHsC-VriV4GLvhvQOFjA"
+                    gambar: "https://i.ibb.co/9qGB2nt/IMG-20190626-093853-min.jpg"
                 },{
                     nama: "Product Analyst Intern",
                     org: "Ruangguru",
                     waktu: "May 2019 - July 2019",
-                    gambar: "https://docs.google.com/uc?export=download&id=1qEUljU38FmxcEzYgr1LAaEDAmYssnbAB"
+                    gambar: "https://i.ibb.co/9nnB8fd/IMG-20190719-134847-01-min.jpg"
                 },{
                     nama: "XL Future Leaders Batch 7 Awardee",
                     org: "XL Axiata",
                     waktu: "October 2018 - now",
-                    gambar: "https://docs.google.com/uc?export=download&id=1y_GMoO346vSXNcdoTmLWVIwv6-nGrlwa"
+                    gambar: "https://i.ibb.co/NFnBcqN/IMG-20181125-WA0061.jpg"
                 },
-            ]
+            ],
+            show: false,
         }
     },
     methods: {
@@ -286,6 +312,12 @@ export default {
         },
         goToIG(){
             window.open("https://www.instagram.com/fadelrahman31/")
+        },
+        goToTwitter(){
+            window.open("https://twitter.com/FadelRahman31")
+        },
+        goToSpotify(){
+            window.open("https://open.spotify.com/user/vvkvygk8rbhe42hlykcubsrmt?si=B-5Vx5ipS-qsgagDzbBhgw")
         }
     }
     

@@ -41,10 +41,14 @@
                                     v-text= "point.info"
                                 ></v-card-subtitle>
                             </div>
-
-                            <v-avatar>
-                                <v-icon dark> {{ point.icon }} </v-icon>
-                            </v-avatar>
+                            <v-card-actions>
+                                <v-avatar>
+                                    <v-icon dark> {{ point.icon }} </v-icon>
+                                </v-avatar>
+                                <v-btn dark text>
+                                    <a :href="point.link"> <h3 class="links">Github Page</h3></a>
+                                </v-btn>
+                            </v-card-actions>
                         </v-card>
                     </v-col>
                 </v-row>
@@ -57,6 +61,9 @@
 <style>
     .projects{
         font-family: 'Roboto', sans-serif;
+    }
+    .links:link{
+        color: white;
     }
 </style>
 
@@ -75,29 +82,40 @@ export default {
             },
             projectList:[
                 {
+                    nama: 'Sportbabe Mobile Application',
+                    info: 'Flutter-based productivity application that helps and facilitates a person in carrying out sports activities by providing a list of available sports venues along with the information needed plus facilitating someone to order the sports venue effectively and efficiently.”',
+                    icon: 'mdi-cellphone',
+                    link: 'https://github.com/fadelrahman31/sportbabe-app'
+                },
+                {
                     nama: 'Electronic Document Issuance Web App',
                     info: 'Aplikasi pengajuan dokumen kemahsiswaan pada Tata Usaha STEI ITB',
-                    icon: 'mdi-file-document-box-multiple'
+                    icon: 'mdi-text-box-multiple',
+                    link: 'https://github.com/fadelrahman31/edi-project'
                 },
                 {
                     nama: 'Info Kost Web App',
                     info: 'Aplikasi penyediaan dan pengelolaan informasi kost',
-                    icon: 'mdi-cellphone-information'
+                    icon: 'mdi-cellphone-information',
+                    link: 'https://github.com/fadelrahman31/info-kost-app'
                 },
                 {
                     nama: 'Info Kost Data Crawler',
                     info: 'Crawler Data Engine untuk informasi kost dari internet',
-                    icon: 'mdi-database-search'
+                    icon: 'mdi-database-search',
+                    link: 'https://github.com/fadelrahman31/HTTP-RESTful-API-Without-Framework'
                 },
                 {
                     nama: 'Python 3 HTTP Server',
                     info: 'HTTP Server custom berbasis Python 3',
-                    icon: 'mdi-server'
+                    icon: 'mdi-server',
+                    link: 'https://github.com/fadelrahman31/HTTP-Server-with-SSL-Authentication'
                 },
                 {
                     nama: 'Sistem Informasi Registrasi Mahasiswa Baru',
                     info: 'Bagian dari project platform Smart Campus System',
-                    icon: 'mdi-account-multiple-check'
+                    icon: 'mdi-account-multiple-check',
+                    link: ''
                 }
             ]
         }

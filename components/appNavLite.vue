@@ -24,30 +24,13 @@
         <v-app-bar
             fixed
             dark
-            color="#183F66"
+            color="light-blue darken-4"
         >
             <v-app-bar-nav-icon
               @click.stop="drawer = !drawer"
             ></v-app-bar-nav-icon>
             <v-toolbar-title class="font-weight-bold" >{{ appTitle }}</v-toolbar-title>
             
-
-            <template v-slot:extension>
-                <v-tabs 
-                    align-with-title
-                    background-color="transparent"
-                    grow
-                    v-model= "active_tab"
-                >
-                    <v-tab
-                        v-for= "tab in tabs"
-                        :key= "tab.index"
-                        :to= "tab.source"
-                    >
-                        {{ tab.name }}
-                    </v-tab>
-                </v-tabs>
-            </template>
         </v-app-bar>
     </span>
 </template>
@@ -57,7 +40,7 @@
  
 
 export default {
-    name: 'AppNavigation',
+    name: 'AppNavigationLite',
     data(){
         return{
             appTitle: 'FadelRahman',
@@ -65,21 +48,11 @@ export default {
             items: [
                 {
                     title : 'About Me',
-                    path : '/'
+                    path: '/'
                 },
                 {
-                    title : 'Personal Resume' ,
-                    path: '/resume'
-                }
-            ],
-            active_tab: 0,
-            tabs: [
-                {
-                    index: 0, name: 'Welcome!', source: '/'
-                },{
-                    index: 1, name: 'Gallery', source: '/gallery'
-                },{
-                    index: 2, name: 'Projects', source: '/projects'
+                    title : 'Personal Resume',
+                    path : '/resume'
                 }
             ]
         }
