@@ -1,6 +1,7 @@
 # personal-web
 
-> Personal website of Fadel
+> Personal website of Fadel \
+Go to deployed website: https://fadelrahman.xyz
 
 ## Build Setup
 
