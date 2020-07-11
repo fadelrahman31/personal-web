@@ -69,7 +69,7 @@ export default {
             },
             galleryList: [
                 {
-                    nama: 'As a Speaker at Intership Sharing Event!',
+                    nama: 'As a Speaker at Internship Sharing Event!',
                     gambar: 'https://docs.google.com/uc?export=download&id=1aEV1bClh3XjNUDlPJGyvkQy9g1RXSI64'
                 },
                 {
