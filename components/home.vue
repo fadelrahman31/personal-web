@@ -85,7 +85,71 @@
                             <v-btn light color="green" class="ma-2 justify-center" @click="goToSpotify" text>
                                 <v-icon dark>mdi-spotify</v-icon> <b> Spotify </b>
                             </v-btn>
+
+                            <v-dialog v-model="dialog" persistent max-width="600px">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn
+                                        class = "ma-2 justify-center"
+                                        color="blue"
+                                        light
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    >
+                                        <v-icon dark>mdi-email</v-icon> Send Me an Email!
+                                    </v-btn>
+                                </template>
+                                <v-card>
+                                    <v-card-title>
+                                        <span class="headline">Hi, You could send me a message here!</span>
+                                    </v-card-title>
+                                    <v-card-text>
+                                        <v-container>
+                                            <v-row>
+                                                <v-col cols="12" >
+                                                    <v-text-field 
+                                                        v-model = "name"
+                                                        :rules= "rulesName"
+                                                        label="Your name*" 
+                                                        required
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-text-field
+                                                        v-model = "email" 
+                                                        :rules = "rulesEmail"
+                                                        label="Your email*" 
+                                                        required
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-text-field 
+                                                        v-model = "subject"
+                                                        :rules = "rulesSubject"
+                                                        label="Subject*" 
+                                                        required
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-text-field 
+                                                        v-model = "message"
+                                                        label="Message*"
+                                                        :counter = "500" 
+                                                        required
+                                                    ></v-text-field>
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                        <small>*indicates required field</small>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                        <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+                                        <v-btn color="green" dark  @click="dialog = false">Send</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
                         </v-card>
+                        
                     </v-col>
                 </v-row>
             </v-container>
@@ -298,6 +362,21 @@ export default {
                 },
             ],
             show: false,
+            dialog: false,
+            name: "",
+            rulesName: [
+                v => !!v || 'Your name is required',
+            ],
+            email: "",
+            rulesEmail: [
+                v => !!v || 'Valid email is required',
+                v => /.+@.+\..+/.test(v) || 'Email must be valid'
+            ],
+            subject: "",
+            rulesSubject: [
+                v => !!v || 'Please fill in the email subject',
+            ],
+            message: ""
         }
     },
     methods: {
