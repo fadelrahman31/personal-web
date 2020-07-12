@@ -39,10 +39,15 @@
                                 src="https://i.ibb.co/wLPWWzq/welcome.jpg"
                             >
                             </v-img>
+                            
                             <v-card-actions>
-                                <v-btn icon @click="show = !show">
+                                <!-- <v-btn icon @click="show = !show" class="pa-3">
                                    <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down'}}</v-icon> Personal Resume
+                                </v-btn> -->
+                                <v-btn @click="show = !show" text>
+                                    <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down'}}</v-icon>Personal Resume 
                                 </v-btn>
+
                             </v-card-actions>
                             <v-expand-transition>
                                 <div v-show="show">
@@ -53,7 +58,6 @@
                                     <v-btn class="ma-3 pa-2" href="/resume" text>Click here</v-btn>
                                 </div>
                             </v-expand-transition>
-
                         </v-card>
                     </v-col>
                     <v-spacer></v-spacer>
@@ -104,6 +108,9 @@
                                     </v-card-title>
                                     <v-card-text>
                                         <v-container>
+                                            <v-form
+                                                v-model="valid"
+                                            >
                                             <v-row>
                                                 <v-col cols="12" >
                                                     <v-text-field 
@@ -138,13 +145,51 @@
                                                     ></v-text-field>
                                                 </v-col>
                                             </v-row>
+                                            </v-form>
                                         </v-container>
                                         <small>*indicates required field</small>
                                     </v-card-text>
                                     <v-card-actions>
                                     <v-spacer></v-spacer>
                                         <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                                        <v-btn color="green" dark  @click="dialog = false">Send</v-btn>
+                                        <v-btn 
+                                            color="green" 
+                                            dark  
+                                            @click="
+                                                submitEmail()
+                                            " 
+                                            :disabled= "!valid"
+                                        >Send</v-btn>
+                                        <v-overlay
+                                         :absolute="absolute"
+                                         :value="overlay"
+                                        >
+                                            <v-card
+                                                class="ma-5 pa-3 justify-center"
+                                                light
+                                            >
+                                                <v-card-title>
+                                                    Thank you!
+                                                </v-card-title>
+                                                <v-spacer></v-spacer>
+                                                <v-card-subtitle>
+                                                    <h4 class="font-weight-bold">私へのメッセージをありがとう!</h4>
+                                                </v-card-subtitle>
+                                                <v-spacer></v-spacer>
+                                                <v-card-actions>
+                                                    <v-btn
+                                                        color="success"
+                                                        @click="
+                                                            overlay = false
+                                                            dialog = false
+                                                            clearAll()
+                                                        "
+                                                    >
+                                                        Go Back to Home
+                                                    </v-btn>
+                                                </v-card-actions>
+                                            </v-card>
+                                    </v-overlay>
                                     </v-card-actions>
                                 </v-card>
                             </v-dialog>
@@ -311,6 +356,8 @@
 </style>
 
 <script>
+import axios from '@nuxtjs/axios'
+
 export default {
     name: 'HomePage',
     data(){
@@ -361,8 +408,11 @@ export default {
                     gambar: "https://i.ibb.co/NFnBcqN/IMG-20181125-WA0061.jpg"
                 },
             ],
+            valid: true,
             show: false,
             dialog: false,
+            absolute: true,
+            overlay: false,
             name: "",
             rulesName: [
                 v => !!v || 'Your name is required',
@@ -397,6 +447,30 @@ export default {
         },
         goToSpotify(){
             window.open("https://open.spotify.com/user/vvkvygk8rbhe42hlykcubsrmt?si=B-5Vx5ipS-qsgagDzbBhgw")
+        },
+        submitEmail(){
+            this.$axios.post('https://faderman-contactme.herokuapp.com/email', {
+                name: this.name,
+                email: this.email,
+                subject: this.subject,
+                message: this.message
+            }, {
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then((response) => {
+                //console.log(response)
+            }).catch((e) => {
+                console.error(e)
+            })
+
+            this.overlay = !this.overlay
+        },
+        clearAll(){
+            this.name='',
+            this.email='',
+            this.subject='',
+            this.message=''
         }
     }
     
