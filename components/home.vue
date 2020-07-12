@@ -39,10 +39,15 @@
                                 src="https://i.ibb.co/wLPWWzq/welcome.jpg"
                             >
                             </v-img>
+                            
                             <v-card-actions>
-                                <v-btn icon @click="show = !show">
+                                <!-- <v-btn icon @click="show = !show" class="pa-3">
                                    <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down'}}</v-icon> Personal Resume
+                                </v-btn> -->
+                                <v-btn @click="show = !show" text>
+                                    <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down'}}</v-icon>Personal Resume 
                                 </v-btn>
+
                             </v-card-actions>
                             <v-expand-transition>
                                 <div v-show="show">
@@ -53,7 +58,6 @@
                                     <v-btn class="ma-3 pa-2" href="/resume" text>Click here</v-btn>
                                 </div>
                             </v-expand-transition>
-
                         </v-card>
                     </v-col>
                     <v-spacer></v-spacer>
@@ -85,7 +89,112 @@
                             <v-btn light color="green" class="ma-2 justify-center" @click="goToSpotify" text>
                                 <v-icon dark>mdi-spotify</v-icon> <b> Spotify </b>
                             </v-btn>
+
+                            <v-dialog v-model="dialog" persistent max-width="600px">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn
+                                        class = "ma-2 justify-center"
+                                        color="blue"
+                                        light
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    >
+                                        <v-icon dark>mdi-email</v-icon> Send Me an Email!
+                                    </v-btn>
+                                </template>
+                                <v-card>
+                                    <v-card-title>
+                                        <span class="headline">Hi, You could send me a message here!</span>
+                                    </v-card-title>
+                                    <v-card-text>
+                                        <v-container>
+                                            <v-form
+                                                v-model="valid"
+                                            >
+                                            <v-row>
+                                                <v-col cols="12" >
+                                                    <v-text-field 
+                                                        v-model = "name"
+                                                        :rules= "rulesName"
+                                                        label="Your name*" 
+                                                        required
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-text-field
+                                                        v-model = "email" 
+                                                        :rules = "rulesEmail"
+                                                        label="Your email*" 
+                                                        required
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-text-field 
+                                                        v-model = "subject"
+                                                        :rules = "rulesSubject"
+                                                        label="Subject*" 
+                                                        required
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-text-field 
+                                                        v-model = "message"
+                                                        label="Message*"
+                                                        :counter = "500" 
+                                                        required
+                                                    ></v-text-field>
+                                                </v-col>
+                                            </v-row>
+                                            </v-form>
+                                        </v-container>
+                                        <small>*indicates required field</small>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                        <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+                                        <v-btn 
+                                            color="green" 
+                                            dark  
+                                            @click="
+                                                submitEmail()
+                                            " 
+                                            :disabled= "!valid"
+                                        >Send</v-btn>
+                                        <v-overlay
+                                         :absolute="absolute"
+                                         :value="overlay"
+                                        >
+                                            <v-card
+                                                class="ma-5 pa-3 justify-center"
+                                                light
+                                            >
+                                                <v-card-title>
+                                                    Thank you!
+                                                </v-card-title>
+                                                <v-spacer></v-spacer>
+                                                <v-card-subtitle>
+                                                    <h4 class="font-weight-bold">私へのメッセージをありがとう!</h4>
+                                                </v-card-subtitle>
+                                                <v-spacer></v-spacer>
+                                                <v-card-actions>
+                                                    <v-btn
+                                                        color="success"
+                                                        @click="
+                                                            overlay = false
+                                                            dialog = false
+                                                            clearAll()
+                                                        "
+                                                    >
+                                                        Go Back to Home
+                                                    </v-btn>
+                                                </v-card-actions>
+                                            </v-card>
+                                    </v-overlay>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
                         </v-card>
+                        
                     </v-col>
                 </v-row>
             </v-container>
@@ -247,6 +356,8 @@
 </style>
 
 <script>
+import axios from '@nuxtjs/axios'
+
 export default {
     name: 'HomePage',
     data(){
@@ -297,7 +408,25 @@ export default {
                     gambar: "https://i.ibb.co/NFnBcqN/IMG-20181125-WA0061.jpg"
                 },
             ],
+            valid: true,
             show: false,
+            dialog: false,
+            absolute: true,
+            overlay: false,
+            name: "",
+            rulesName: [
+                v => !!v || 'Your name is required',
+            ],
+            email: "",
+            rulesEmail: [
+                v => !!v || 'Valid email is required',
+                v => /.+@.+\..+/.test(v) || 'Email must be valid'
+            ],
+            subject: "",
+            rulesSubject: [
+                v => !!v || 'Please fill in the email subject',
+            ],
+            message: ""
         }
     },
     methods: {
@@ -318,6 +447,30 @@ export default {
         },
         goToSpotify(){
             window.open("https://open.spotify.com/user/vvkvygk8rbhe42hlykcubsrmt?si=B-5Vx5ipS-qsgagDzbBhgw")
+        },
+        submitEmail(){
+            this.$axios.post('https://faderman-contactme.herokuapp.com/email', {
+                name: this.name,
+                email: this.email,
+                subject: this.subject,
+                message: this.message
+            }, {
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then((response) => {
+                //console.log(response)
+            }).catch((e) => {
+                console.error(e)
+            })
+
+            this.overlay = !this.overlay
+        },
+        clearAll(){
+            this.name='',
+            this.email='',
+            this.subject='',
+            this.message=''
         }
     }
     
