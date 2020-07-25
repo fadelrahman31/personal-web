@@ -1,4 +1,7 @@
 const colors = require('vuetify/es5/util/colors').default
+const Prismic = require('prismic-javascript');
+const { initApi } = require('./prismic.config');
+
 
 module.exports = {
   mode: 'spa',
@@ -47,7 +50,8 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
+    '@nuxtjs/dotenv'
+    
   ],
   /*
   ** Axios module configuration
@@ -89,6 +93,40 @@ module.exports = {
 
         fs: "empty"
     };
-}
+   }
+  },
+  generate: {
+    routes: function() {
+      // const funct = require('./prismic.config');
+      // const initApi = funct.initApi;
+
+      const blogPage = initApi().then(api => {
+        return api  
+          .query(Prismic.Predicates.at('document.type', 'fadel-blog-post'))
+          .then(response => {
+            return [{
+              route: `/blog`,
+              payload: response.results
+            }]
+          })
+      })
+
+      const blogPosts = initApi().then(api => {
+        return api  
+          .query(Prismic.Predicates.at('document.type', 'fadel-blog-post'))
+          .then(response => {
+            return response.results.map(payload => {
+              return {
+                route: `/blog/${payload.uid}`,
+                payload
+              }
+            })
+          })
+      })
+
+      return Promise.all([blogPage, blogPosts]).then(values => {
+        return [...values[0], ...values[1]]
+      })
+    }
   }
 }

@@ -21,6 +21,8 @@
     "net": "^1.0.2",
     "nuxt": "^2.13.3",
     "pdfvuer": "^1.6.1",
+    "prismic-dom": "^2.2.3",
+    "prismic-javascript": "^3.0.1",
     "vue-pdf": "^4.1.0"
   },
   "devDependencies": {
