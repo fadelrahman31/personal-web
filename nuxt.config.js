@@ -48,7 +48,14 @@ module.exports = {
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    '@nuxtjs/prismic'
   ],
+  prismic: {
+    endpoint: 'https://fadelrahman.cdn.prismic.io/api/v2',
+    linkResolver: '@/plugins/link-resolver',
+    htmlSerializer: '@/plugins/html-serializer'
+  },
+
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
@@ -90,5 +97,9 @@ module.exports = {
         fs: "empty"
     };
 }
+  },
+
+  generate: {
+    fallback: '404.html'
   }
 }
